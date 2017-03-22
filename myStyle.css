@@ -1,0 +1,77 @@
+
+
+
+h1{
+     background-color:red;
+    color:white;
+    font-size:5em;
+    font-family:Bitter;
+   margin: 20px auto; 
+}
+h2{
+    text-align: center;
+    margin: 20px; 
+}
+.break, .pomodoro {
+    text-align:center;
+    padding: 25px;
+    font-size: 2em;
+}
+#time{
+    text-align: center;
+    font-size: 6em;
+    border-right: solid red 10px;
+border-left:  solid red 10px;   
+font-family:sans-serif;
+}
+#circle{
+    text-align: center; 
+}
+
+button{
+    border: none;
+    background-color:white;
+    font-size: 0.9em;
+}
+.pomodoroTime, .breakTime{
+    font-size: 30px;
+}
+#toggle{
+    margin-top: 45px;
+    font-size: 1.3em;
+    background-color: white;
+    text-align: center;
+    text-decoration: none;
+    background-color: #f44336;
+    color: white;
+    font-family:monospace;
+    width: 120px;
+    height: 40px;
+}
+.text{
+    font-size: 1.4em;
+    margin: 10px 20px;
+    padding: 20px 10px;
+    font-family: sans-serif;
+}
+.btnspan{
+    background-color: dodgerblue;
+    color: white;
+    padding:0 5px;
+    font-size: 0.8em;
+}
+.word{
+    color:white;
+    background-color:#f44336;
+    padding:0 5px;
+    font-size: 0.8em;
+}
+.breakBtn{
+    width: 100px;
+    height: 30px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+     background-color: dodgerblue;
+    color: white;
+}

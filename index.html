@@ -1,8 +1,142 @@
+<!DOCTYPE html>
 <html >
 <head>
-    </head>
+  <meta charset="UTF-8">
+  <title>Pomodoro Clock</title>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="myStyle.css">
+    <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet"> 
+</head>
 <body>
-<h1>hello, world</h1>
-    <p>code</p>    
-</body>
+    <h1 class=text-center>Pomodoro clock</h1>
+    <div class='container-fluid'>
+        <div class='row'>
+            <div class='break col-lg-3 col-md-3 col-sm-3 col-xs-4'><b>Break length:</b><br> 
+    <button class='fixBreak'>-</button>
+    <span class='breakTime'>5</span>
+        <button class='fixBreak'>+</button>   
+    </div>    
+            <div id='circle' class='col-lg-6 col-md-6 col-sm-6 col-xs-4'><div id='test' class='row'><div class='breakDiv col-lg-6 col-md-6 col-sm-6 col-xs-6'><button class='breakBtn' id='break'>Short Break</button></div><div class='longBreakDiv col-lg-6 col-md-6 col-sm-6 col-xs-6'><button class='breakBtn' id="longBreak">Long Break</button></div></div><div id='time'>25:00</div>
+    <button id='toggle'  onclick='count()'>start</button>
+         </div>
+    
+    <div class='pomodoro col-lg-3 col-md-3 col-sm-3 col-xs-4'><b>
+        Session length:</b><br>
+    <button class='fixPom'>-</button>    
+    <span class='pomodoroTime'>25</span>
+    <button class='fixPom'>+</button>       
+    </div>
+   
+    </div>
+    <div class='text'>    
+        <h2>How to use Pomodoro Clock</h2>  
+    <ol>
+        <li>Decide on the task to be done.</li>
+        <li>Set the pomodoro timer (traditionally to 25 minutes).</li>
+        <li>Press <span class='word'>start</span> button. Work on the task until the timer rings.</li>
+        <li> Take a <span class='btnspan'>short break</span> (3–5 minutes), then go to step 3.</li>
+        <li> After four pomodoros, take a longer break (15–30 minutes). You can set it or  press <span class='btnspan'>Long Break</span> button (equals to duration of <b>3 short breaks</b>),then go to step 1.</li>
+    </ol>
+        </div>    
+        </div>
+        <script>
+var timerId;
+var breakTime=$('.breakTime').text();
+var workTime=$('.pomodoroTime').text();            
+  var temp = workTime;            
+   var time =['00'];
+           
+          
+   $('.fixBreak').on('click',function(){ //set break time
+       switch ($(this).text()){
+           case '-':
+               if(breakTime >1){
+               breakTime--;
+                   }
+         break;
+           case '+':
+               breakTime++;
+               break;
+       }
+$('.breakTime').text(breakTime);
+   })
+      $('.fixPom').on('click',function(){ //set pomodoro time
+       switch ($(this).text()){
+           case '-':
+               if(workTime >1){
+               workTime--;
+                   }
+         break;
+           case '+':
+               workTime++;
+               break;
+       }
+$('.pomodoroTime').text(workTime);
+          $('#time').text(workTime + ':00');  
+   })        
+         
+    $('.breakBtn').on('click',function(){
+        breakTime=$('.breakTime').text();
+        if($(this).text()=='Long Break'){
+            breakTime=breakTime * 3;
+        }
+        workTime=breakTime;
+        count();
+        workTime = temp;
+        return false;
+    })  
+     
+      function count(){ //show timer
+               workTime-$('.pomodoroTime').text();
+            var change = document.getElementById('toggle');
+            if(change.innerHTML == 'start'){ 
+                
+                time.unshift(workTime);
+                timerId = setInterval(function(){
+                    
+                    if(time[1]== 00){
+                        
+                      time[0]--;
+                      time[1]=59;
+                  }
+                    if(time[0]<0){ //if time passed
+                        clearInterval(timerId);
+                         document.getElementById('time').innerHTML = '0:00';
+                        change.innerHTML = 'reset';
+                        $('.fixBreak').show();
+                        $('.fixPom').show();
+                    }else{
+                        if(time[1]< 10){
+                            time[1]= '0' + time[1];
+                        }
+                         if(time[0]< 10){
+                            time[0]= '0' + time[0];
+                        }
+                    document.getElementById('time').innerHTML = time[0] + ':' + time[1];
+                    time[1]--;
+                        time[0] =Number(time[0]);
+                    }
+                },1000);
+                $('.fixBreak').hide();
+                $('.fixPom').hide();
+                change.innerHTML = 'reset';
+            
+            }else{
+                workTime = $('.pomodoroTime').text();
+                clearInterval(timerId);
+                change.innerHTML = 'start';
+                time.shift();
+                time[0]='00';
+                $('.fixBreak').show();
+                $('.fixPom').show();
+                document.getElementById('time').innerHTML = workTime + ':' + time[0];
+                
+            }
+            
+        }
+    
+    </script>
+    </body>
 </html>
