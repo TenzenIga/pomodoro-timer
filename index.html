@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet"> 
 </head>
 <body>
+    <audio id="alarm" src="Mp3-alarm-clock.mp3" preload="auto"></audio>
     <h1 class=text-center>Pomodoro clock</h1>
     <div class='container-fluid'>
         <div class='row'>
@@ -103,6 +104,7 @@ $('.pomodoroTime').text(workTime);
                   }
                     if(time[0]<0){ //if time passed
                         clearInterval(timerId);
+                         document.getElementById('alarm').play();
                          document.getElementById('time').innerHTML = '0:00';
                         change.innerHTML = 'reset';
                         $('.fixBreak').show();
@@ -115,7 +117,8 @@ $('.pomodoroTime').text(workTime);
                             time[0]= '0' + time[0];
                         }
                     document.getElementById('time').innerHTML = time[0] + ':' + time[1];
-                    time[1]--;
+                    document.getElementsByTagName('title').innerHTML = time[0] + ':' + time[1];
+                        time[1]--;
                         time[0] =Number(time[0]);
                     }
                 },1000);
